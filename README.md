@@ -140,6 +140,7 @@ ML Model (XGBoost)
     "Severity_Label": "🚨 Critical"
   }
 ]
+```
 
 --- 
 

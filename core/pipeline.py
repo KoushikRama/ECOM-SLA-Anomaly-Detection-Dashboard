@@ -25,6 +25,9 @@ def run_pipeline(hours, backend):
         "sagemaker": SAGEMAKER_URL
     }
 
+
+    payload = payload.astype(object)
+
     data = call_api(payload.to_dict(orient="records"), backend, urls)
 
     results = pd.DataFrame(data)

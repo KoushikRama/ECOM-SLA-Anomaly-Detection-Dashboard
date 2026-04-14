@@ -1,5 +1,6 @@
 from datetime import datetime
 import pandas as pd
+import numpy as np
 
 from core.generate_test_data import generate_test_data
 from config.loader import load_data_config
@@ -27,7 +28,7 @@ def run_pipeline(hours, backend):
 
 
     payload = payload.astype(object)
-
+    payload = payload.replace({np.nan: None})
     data = call_api(payload.to_dict(orient="records"), backend, urls)
 
     results = pd.DataFrame(data)

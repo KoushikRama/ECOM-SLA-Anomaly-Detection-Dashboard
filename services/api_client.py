@@ -1,10 +1,11 @@
 import requests
-
+import json
 def call_api(payload, backend, urls):
     
     API_URL = urls["fastapi"] if backend == "FastAPI" else urls["sagemaker"]
 
-    response = requests.post(API_URL, json=payload)
+
+    response = requests.post(API_URL, json=json.loads(json.dumps(payload)))
 
     if response.status_code != 200:
         raise Exception(f"API Error: {response.text}")

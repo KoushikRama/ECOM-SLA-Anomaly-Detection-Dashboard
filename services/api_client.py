@@ -1,8 +1,8 @@
 import requests
 
-def call_api(payload, backend, urls):
+def call_api(payload, url):
     
-    API_URL = urls["fastapi"] if backend == "FastAPI" else urls["sagemaker"]
+    API_URL = url
 
     response = requests.post(API_URL, json=payload)
 

@@ -16,10 +16,10 @@ st.sidebar.header("Controls")
 
 hours = st.sidebar.slider("Test Duration (hours)", 24, 168, 48)
 
-backend = st.sidebar.selectbox(
-    "Select Inference Backend",
-    ["FastAPI", "SageMaker"]
-)
+# backend = st.sidebar.selectbox(
+#     "Select Inference Backend",
+#     ["FastAPI", "SageMaker"]
+# )
 
 run_button = st.sidebar.button("Run Pipeline")
 
@@ -34,7 +34,7 @@ if "results" not in st.session_state:
 # =========================================
 if run_button:
     with st.spinner("Running pipeline..."):
-        results = run_pipeline(hours, backend)
+        results = run_pipeline(hours)
 
     st.session_state.results = results
     st.success("Pipeline completed")

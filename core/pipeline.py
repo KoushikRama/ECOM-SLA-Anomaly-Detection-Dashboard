@@ -8,7 +8,7 @@ from services.api_client import call_api
 from config.settings import FASTAPI_URL, SAGEMAKER_URL
 
 
-def run_pipeline(hours, backend):
+def run_pipeline(hours):
 
     config = load_data_config()
 
@@ -21,15 +21,11 @@ def run_pipeline(hours, backend):
     payload = df_test.copy()
     payload["timestamp"] = payload["timestamp"].astype(str)
 
-    urls = {
-        "fastapi": FASTAPI_URL,
-        "sagemaker": SAGEMAKER_URL
-    }
-
+    url = SAGEMAKER_URL
 
     payload = payload.astype(object)
     payload = payload.replace({np.nan: None})
-    data = call_api(payload.to_dict(orient="records"), backend, urls)
+    data = call_api(payload.to_dict(orient="records"), url)
 
     results = pd.DataFrame(data)
 

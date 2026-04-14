@@ -43,15 +43,15 @@ Anomalies may indicate:
 
 ## 🏗️ Architecture Overview
 
-"""
+```
 Synthetic Data → Feature Engineering → Model → Thresholding → Inference → API Gateway → Dashboard
-"""
+```
 
 ---
 
 ### ☁️ Cloud Architecture
 
-"""
+```
 Streamlit UI
 ↓
 API Gateway (REST API)
@@ -59,13 +59,13 @@ API Gateway (REST API)
 SageMaker Endpoint (Serverless)
 ↓
 ML Model (XGBoost)
-"""
+```
 
 ---
 
 ## 📁 Project Structure
 
-"""
+```
 .
 ├── app.py # Streamlit UI
 ├── config/ # Config (API URL, constants)
@@ -76,7 +76,7 @@ ML Model (XGBoost)
 │ └── api_client.py # API calls
 ├── utils/ # Plotting & helpers
 ├── requirements.txt
-"""
+```
 
 
 ---
@@ -108,7 +108,7 @@ ML Model (XGBoost)
 [
   {
     "timestamp": "2025-04-01 10:00:00",
-    "operation": "checkout",
+    "operation": "browse_products",
     "success_vol": 8000,
     "fail_vol": 300,
     "success_rt_avg": 150,
@@ -121,18 +121,31 @@ ML Model (XGBoost)
 ```json
 [
   {
-    "operation": "checkout",
+    "operation": "browse_products",
+    "hour": 10,
+    "success_vol": 8000,
+    "fail_vol": 300,
+    "success_rt_avg": 150,
+    "fail_rt_avg": 120,
+
+    "pred_success_rt_avg": 169.92,
+    "pred_fail_rt_avg": 145.48,
+    "pred_success_vol": 82533.85,
+    "pred_fail_vol": 273.93,
+
     "Status": "Anomaly",
     "Root_Cause": "success_vol",
-    "Severity": 2.89,
+    "All_Causes": "success_vol:2.89",
+    "Severity": 2.893,
     "Severity_Label": "🚨 Critical"
   }
 ]
-```
 
 --- 
 
 ## 🤖 Model (XGBoost Residual-Based)
+
+---
 
 ### 🔍 Approach
 
@@ -141,11 +154,14 @@ ML Model (XGBoost)
 - Compute residuals (actual vs predicted)
 - Apply threshold-based anomaly detection
 
+---
+
 ### ⚙️ Pipeline
 
-"""
+```
 Features → XGBoost → Prediction → Residual → Threshold → Alert
-"""
+```
+---
 
 ### 📈 Strengths
 
@@ -153,10 +169,14 @@ Features → XGBoost → Prediction → Residual → Threshold → Alert
 - Provides root cause (metric-level)
 - Interpretable outputs
 
+---
+
 ### ⚠️ Limitations
 
 - Requires threshold tuning
 - Depends on consistent input schema
+
+---
 
 ### 🔁 Thresholding Strategy
 
@@ -165,12 +185,16 @@ Features → XGBoost → Prediction → Residual → Threshold → Alert
     - percentage deviation
     - absolute deviation
 
+---
+
 ### 🧪 Data Simulation
 
 Synthetic SLA data includes:
 - Realistic traffic patterns (peak & off-peak)
 - Load-based latency increases
 - Failure rate correlation with load
+
+---
 
 ### 🚨 Injected Anomalies
 

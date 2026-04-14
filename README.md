@@ -2,6 +2,10 @@
 
 ---
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ecom-sla-anomaly-detection-dashboard-5lvhxfr87rf9xu349caae3.streamlit.app/)
+
+---
+
 ## 🎯 Goal
 
 Detect **anomalies in hourly aggregated e-commerce SLA metrics**, including:
